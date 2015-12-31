@@ -64,7 +64,9 @@
 			</tr>
 			<tr>
 				<td colspan='2'><input name="submit" type="submit"
-				  value="submit" /></td>
+				  value="submit" />
+				<a href="register">회원가입</a>
+				  </td>
 			</tr>
 		  </table>
 

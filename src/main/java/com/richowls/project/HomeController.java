@@ -10,6 +10,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.security.authentication.AnonymousAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -21,8 +22,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.richowls.project.command.BCommand;
+import com.richowls.project.command.BRegisterCommand;
 import com.richowls.project.dao.ContentDao;
 import com.richowls.project.dao.IDao;
+import com.richowls.project.util.Constant;
 
 /**
  * Handles requests for the application home page.
@@ -36,7 +40,16 @@ public class HomeController {
 	
 	@Autowired
 	private SqlSession sqlSession;
+	BCommand command = null;
 	
+	private JdbcTemplate template;
+	
+	@Autowired
+	public void setTemplate(JdbcTemplate template) {
+		this.template = template;
+		Constant.template = this.template;
+	}
+
 /*	@Autowired
 	public void setDao(ContentDao dao) {
 		this.dao = dao;
@@ -94,16 +107,6 @@ public class HomeController {
 		return "redirect:list";
 	}
 
-//	@RequestMapping("/login.html")
-//	public String login(Locale locale, Model model) {
-//		return "security/login";
-//	}
-//
-//	@RequestMapping("/welcome.html")
-//	public String welcome(Locale locale, Model model) {
-//		return "security/welcome";
-//	}
-
 	@RequestMapping(value = { "/", "/welcome**" }, method = RequestMethod.GET)
 	public ModelAndView defaultPage() {
 
@@ -160,5 +163,15 @@ public class HomeController {
 	  model.setViewName("403");
 	  return model;
 
+	}
+
+	@RequestMapping("/register")
+	public String register(HttpServletRequest request, Model model) {
+		model.addAttribute("request", request);
+		
+		command = new BRegisterCommand();
+		command.execute(model);
+
+		return null;
 	}
 }
