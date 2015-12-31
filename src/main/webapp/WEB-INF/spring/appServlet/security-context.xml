@@ -15,13 +15,14 @@
 
 		<security:form-login login-page="/login"
 			default-target-url="/welcome" authentication-failure-url="/login?error"
-			username-parameter="username" password-parameter="password" />
-		<security:logout logout-success-url="/login?logout" />
+			username-parameter="username" password-parameter="password" login-processing-url="/auth/login_check" />
+		<security:logout logout-success-url="/login?logout" delete-cookies="JSESSIONID"/>
 		<!-- <csrf/> -->
 	</security:http>
 
 	<security:authentication-manager>
 		<security:authentication-provider>
+		    <security:password-encoder ref="encoder" />
 			<security:jdbc-user-service
 				data-source-ref="dataSource"
 				users-by-username-query="select username,password, enabled from users where username=?"
@@ -29,5 +30,14 @@
 		</security:authentication-provider>
 	</security:authentication-manager>
 
-
+	<bean id="encoder" class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder">
+		<constructor-arg name="strength" value="10" />
+	</bean>
+	
 </beans>
+
+
+
+
+
+

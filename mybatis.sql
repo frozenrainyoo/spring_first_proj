@@ -16,9 +16,12 @@ select * from board;
 
 http://www.mkyong.com/spring-security/spring-security-form-login-using-database/
 
+drop table user_roles;
+drop table users;
+
 CREATE  TABLE users (
   username VARCHAR(45) NOT NULL ,
-  password VARCHAR(45) NOT NULL ,
+  password VARCHAR(60) NOT NULL ,
   enabled TINYINT NOT NULL DEFAULT 1 ,
   PRIMARY KEY (username));
   
@@ -50,5 +53,6 @@ VALUES ('dwyoo', 'ROLE_USER');
 INSERT INTO user_roles (username, role)
 VALUES ('dwyoo', 'ROLE_ADMIN');
 
+select * from users;
 
 

@@ -20,7 +20,8 @@ public class BRegisterCommand implements BCommand {
 		String bPassword = request.getParameter("bPassword");
 		
 		BDao dao = new BDao();
-		dao.register(bUsername, bPassword);
+		dao.register(bUsername, bPassword, "ROLE_USER");
+		
 	}
 
 }

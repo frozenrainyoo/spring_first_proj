@@ -37,11 +37,11 @@
 </head>
 <body onload='document.loginForm.username.focus();'>
 
-	<h1>Spring Security Login Form (Database Authentication)</h1>
+	<h1>Spring Security Password Encoder</h1>
 
 	<div id="login-box">
 
-		<h2>Login with Username and Password</h2>
+		<h3>Login with Username and Password</h3>
 
 		<c:if test="${not empty error}">
 			<div class="error">${error}</div>
@@ -51,29 +51,31 @@
 		</c:if>
 
 		<form name='loginForm'
-		  action="<c:url value='/j_spring_security_check' />" method='POST'>
+			action="<c:url value='/auth/login_check?targetUrl=${targetUrl}' />"
+			method='POST'>
 
-		<table>
-			<tr>
-				<td>User:</td>
-				<td><input type='text' name='username'></td>
-			</tr>
-			<tr>
-				<td>Password:</td>
-				<td><input type='password' name='password' /></td>
-			</tr>
-			<tr>
-				<td colspan='2'><input name="submit" type="submit"
-				  value="submit" />
-				<a href="register">회원가입</a>
-				  </td>
-			</tr>
-		  </table>
+			<table>
+				<tr>
+					<td>User:</td>
+					<td><input type='text' name='username'></td>
+				</tr>
+				<tr>
+					<td>Password:</td>
+					<td><input type='password' name='password' /></td>
+				</tr>
 
-		  <input type="hidden" name="${_csrf.parameterName}"
-			value="${_csrf.token}" />
+				<tr>
+					<td colspan='2'><input name="submit" type="submit"
+						value="submit" /><a href="registerForm">Sign up</a></td>
+				</tr>
+
+			</table>
+
+			<input type="hidden" name="${_csrf.parameterName}"
+				value="${_csrf.token}" />
 
 		</form>
+
 	</div>
 
 </body>

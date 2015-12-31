@@ -165,6 +165,12 @@ public class HomeController {
 
 	}
 
+	@RequestMapping("/registerForm")
+	public String registerForm() {
+		
+		return "/registerForm";
+	}
+	
 	@RequestMapping("/register")
 	public String register(HttpServletRequest request, Model model) {
 		model.addAttribute("request", request);
@@ -172,6 +178,6 @@ public class HomeController {
 		command = new BRegisterCommand();
 		command.execute(model);
 
-		return null;
+		return "redirect:/";
 	}
 }
