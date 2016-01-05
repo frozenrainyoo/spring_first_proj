@@ -7,6 +7,8 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
 </head>
+<jsp:include page="./fragments/header.jsp" />
+
 <body>
 <table width="500" cellpadding="0" cellspacing="0" border="1">
 	<tr>

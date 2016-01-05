@@ -35,6 +35,7 @@
 }
 </style>
 </head>
+<jsp:include page="./fragments/header.jsp" />
 <body onload='document.loginForm.username.focus();'>
 
 	<h1>Spring Security Password Encoder</h1>
@@ -79,4 +80,7 @@
 	</div>
 
 </body>
+
+<jsp:include page="./fragments/footer.jsp" />
+
 </html>
